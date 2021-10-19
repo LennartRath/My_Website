@@ -88,7 +88,7 @@ params:
         subtitle: Lorem Etiam Nullam
         title: Magna
         url: blogs/magna
-      - image: Rio.jpeg
+      - image: Rio.jpg
         subtitle: Case Study AirBnB in Rio de Janeiro
         title: RIO
         url: blogs/Rio
