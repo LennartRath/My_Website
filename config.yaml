@@ -38,7 +38,7 @@ params:
     enable: yes
     quicklinks:
       - alt: HTML5 UP
-        text: 'Design: HTML5 UP'
+        text: 'THanks to HTML5UP for the free design!'
         url: https://www.html5up.net
     social:
       - icon: fa-facebook
@@ -77,7 +77,7 @@ params:
   tiles:
     enable: yes
     showcase:
-      - image: lbs.jif.jpg
+      - image: lbs.jfif
         subtitle: Ipsum Dolor Sit Amet
         title: Aliquam
         url: blogs/aliquam
