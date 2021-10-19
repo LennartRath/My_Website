@@ -91,7 +91,7 @@ params:
       - image: Rio.jpg
         subtitle: Case Study AirBnB in Rio de Janeiro
         title: RIO
-        url: blogs/Rio
+        url: blogs/rio
 
   two:
     buttonText: Lets goooo!
