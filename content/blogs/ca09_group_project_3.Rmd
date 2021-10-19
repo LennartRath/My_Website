@@ -13,11 +13,21 @@ title: Rio de Janeiro
 ---
 
 
-```{r setup, include=FALSE}
-# leave this chunk alone
-options(knitr.table.format = "html") 
-knitr::opts_chunk$set(warning = FALSE, message = FALSE, 
-  comment = NA, dpi = 300)
+```{r, setup, include=FALSE}
+knitr::opts_chunk$set(
+  message = FALSE, 
+  warning = FALSE,
+  tidy=FALSE,     # display code as typed
+  size="small")   # slightly smaller font for code
+options(digits = 3)
+
+# default figure size
+knitr::opts_chunk$set(
+  fig.width=6.75, 
+  fig.height=6.75,
+  fig.align = "center"
+)
+
 ```
 
 
