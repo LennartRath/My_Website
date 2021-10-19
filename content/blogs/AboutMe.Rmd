@@ -1,0 +1,65 @@
+---
+title: "Yield Curve Inversion"
+date: '2021-10-19'
+description: Case Study Yield Cure Inversion
+draft: no
+image: LennartRath.jpg
+keywords: ''
+slug: aboutme
+categories:
+- ''
+- ''
+---
+
+
+```{r, setup, include=FALSE}
+knitr::opts_chunk$set(
+  message = FALSE, 
+  warning = FALSE,
+  tidy=FALSE,     # display code as typed
+  size="small")   # slightly smaller font for code
+options(digits = 3)
+
+# default figure size
+knitr::opts_chunk$set(
+  fig.width=6.75, 
+  fig.height=6.75,
+  fig.align = "center"
+)
+
+```
+
+
+# My background
+
+To be honest, I do not want to put too much about myself out there on the interwebs.
+Thus, I would like to ask you to enjoy this picture instead and find the publicly available information about myself here.
+
+
+```{r, echo=FALSE, out.width="100%"}
+knitr::include_graphics("/img/cute.jpg", error = FALSE)
+```
+
+# Lennart Rath
+ ## An Autobiography
+ ### _Totally not a lazy CV_
+ 
+ 
+- __Education__
+  1. London Business School
+  2. EDHEC Business School
+  3. Berlin School of Economics and Law
+  
+- __Experience__
+  1. Nomura
+  2. Macquarie Capital
+  3. Commerzbank
+  4. Association of German Chambers of Industry and Commerce
+  
+- __Personal__
+  1. Middle child of three brothers
+  2. Took care of my _12 years younger_ brother
+  3. [Connect with me](https://www.linkedin.com/in/lennart-rath/)
+    
+
+

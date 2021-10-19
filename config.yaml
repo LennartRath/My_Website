@@ -64,12 +64,14 @@ params:
     links:
       - name: Home
         url: '#'
-      - name: Contents
-        url: Contents
-      #- name: Generic Blog
-      #  url: blogs/ipsum
-     # - name: Elements
-      #  url: elements.html
+      - name: About me
+        url: blogs/aboutme
+      - name: Things I enjoy
+        url: blogs/njoy
+      - name: Yield Curve Inversion
+        url: blogs/yieldcurve
+      - name: Rio AirBnB
+        url: blogs/rio
     menu: Menu
     subtitle: Data Science is fun!
     title: Lennart's Portfolio
