@@ -1,0 +1,236 @@
+---
+title: "Yield Curve Inversion"
+date: '2021-10-19'
+description: Case Study Yield Cure Inversion
+draft: no
+image: yield_curve.jpg
+keywords: ''
+slug: yieldcurve
+categories:
+- ''
+- ''
+---
+
+
+```{r, setup, include=FALSE}
+knitr::opts_chunk$set(
+  message = FALSE, 
+  warning = FALSE,
+  tidy=FALSE,     # display code as typed
+  size="small")   # slightly smaller font for code
+options(digits = 3)
+
+# default figure size
+knitr::opts_chunk$set(
+  fig.width=6.75, 
+  fig.height=6.75,
+  fig.align = "center"
+)
+
+```
+
+
+```{r load-libraries, echo=FALSE}
+library(tidyverse)  # Load ggplot2, dplyr, and all the other tidyverse packages
+library(mosaic)
+library(ggthemes)
+library(GGally)
+library(readxl)
+library(here)
+library(skimr)
+library(janitor)
+library(broom)
+library(tidyquant)
+library(infer)
+library(openintro)
+```
+```{r}
+# Load the excel required
+yield_curve <- read_csv(here::here("data","yield_curve.csv"))
+```
+
+
+# Yield Curve inversion
+
+Every so often, we hear warnings from commentators on the "inverted yield curve" and its predictive power with respect to recessions. An explainer what a [inverted yield curve is can be found here](https://www.reuters.com/article/us-usa-economy-yieldcurve-explainer/explainer-what-is-an-inverted-yield-curve-idUSKBN1O50GA). If you'd rather listen to something, here is a great podcast from [NPR on yield curve indicators](https://www.podbean.com/media/share/dir-4zgj9-6aefd11)
+
+In addition, many articles and commentators think that, e.g., [*Yield curve inversion is viewed as a harbinger of recession*](https://www.bloomberg.com/news/articles/2019-08-14/u-k-yield-curve-inverts-for-first-time-since-financial-crisis). One can always doubt whether inversions are truly a harbinger of recessions, and [use the attached parable on yield curve inversions](https://twitter.com/5_min_macro/status/1161627360946511873).
+
+
+```{r yield_curve_parable.jpg, echo=FALSE, out.width="100%"}
+knitr::include_graphics(here::here("images", "yield_curve_parable.jpg"), error = FALSE)
+```
+
+
+In our case we will look at US data and use the [FRED database](https://fred.stlouisfed.org/) to download historical yield curve rates, and plot the yield curves since 1999 to see when the yield curves flatten. If you want to know more, a very nice article that explains the [yield curve is and its inversion can be found here](https://fredblog.stlouisfed.org/2018/10/the-data-behind-the-fear-of-yield-curve-inversions/). 
+
+First, we will load the yield curve data file that contains data on the yield curve since 1960-01-01
+
+```{r download_historical_yield_curve, warning=FALSE}
+
+yield_curve <- read_csv(here::here("data", "yield_curve.csv"))
+
+glimpse(yield_curve)
+```
+
+Our dataframe `yield_curve` has five columns (variables):
+
+- `date`: already a date object
+- `series_id`: the FRED database ticker symbol
+- `value`: the actual yield on that date
+- `maturity`: a short hand for the maturity of the bond
+- `duration`: the duration, written out in all its glory!
+
+
+## Plotting the yield curve
+
+### Yields on US rates by duration since 1960
+
+```{r}
+#  create the plot
+ggplot(yield_curve, aes(x=date, y= value))+
+  # add line, add colours
+  geom_line(size= 1, alpha =1, aes(colour= factor(duration)))+
+  # facetwrap by duration to create separate charts
+  facet_wrap(~duration, nrow = 5)+
+  # add labels
+  labs(title = 'Yields on U.S. Treasury Rates since 1960', caption = "Source: St. Louis Federal Reserve Economic Database (FRED)", y = "%", x="") +
+  # make visuals nicer
+  theme_bw() + 
+  # instead of scales = "free", try set aspect ratio (as we had some issues dispalying)
+  theme(aspect.ratio=1/8) +
+  # make ugly legend disappear
+  theme(legend.position = "none")
+```
+
+
+
+### Monthly yields on US rates by duration since 1999 on a year-by-year basis
+
+```{r}
+# Add a year column
+yield_curve2 <- yield_curve %>%
+  mutate(year = year(date)) %>%
+  # and filter for only years 1999 onwards
+  filter(year(date) >= 1999, year(date) <= 2021) 
+
+# create the plot
+ggplot(yield_curve2, aes(x=maturity, y= value, group = factor(month(date))))+
+  # add line, add colours
+  geom_line(alpha =1, aes(colour= factor(year)))+
+  # facetwrap by duration to create separate charts
+  facet_wrap(vars(year), nrow = 6)+
+  scale_x_discrete(limits = c("1m", "3m", "6m", "1y", "2y", "3y", "5y", "7y", "10y", "20y", "30y"))+
+  # add labels
+  labs(title = 'US Yield Curve', caption = "Source: St. Louis Federal Reserve Economic Database (FRED)", y = "Yield (%)", x="Maturity") +
+  # make visuals nicer
+  theme_bw() + 
+  # instead of scales = "free", try set aspect ratio (as we had some issues dispalying)
+  theme(aspect.ratio=1/4) +
+  # make legend disappear
+  theme(legend.position = "none")
+```
+
+
+### 3-month and 10-year yields since 1999
+
+
+```{r}
+# create a df that only contains wished for data series
+yield_3and10 <- yield_curve %>%
+  filter(series_id == "TB3MS" | series_id == "GS10")
+
+# create the plot
+ggplot(yield_3and10, aes(x=date, y= value))+
+  # add line, add colours
+  geom_line(size= 0.75, alpha =1, aes(colour= factor(duration), scales = "free"))+
+  # add labels
+  labs(title = 'Yields on 3-month and 10-year U.S. Treasury rates since 1999', caption = "Source: St. Louis Federal Reserve Economic Database (FRED)", y = "%", x="") +
+  # make visuals nicer
+    theme_bw() + 
+  # set x axis years to show
+  scale_x_date(limits = as.Date(c("1999-01-01","2021-08-01"))) +
+  # set y-axis maximum (while making sure not to drop any values)
+  ylim(0,7) +
+  # remove legend title
+  theme(legend.title=element_blank())
+```
+
+Besides calculating the spread (10year - 3months), there are a few things we need to do to produce our final plot
+
+1. Setup data for US recessions 
+1. Superimpose recessions as the grey areas in our plot
+1. Plot the spread between 30 years and 3 months as a blue/red ribbon, based on whether the spread is positive (blue) or negative(red)
+
+
+- For the first, the code below creates a dataframe with all US recessions since 1946
+
+```{r setup_US-recessions, warning=FALSE}
+
+# get US recession dates after 1946 from Wikipedia 
+# https://en.wikipedia.org/wiki/List_of_recessions_in_the_United_States
+
+recessions <- tibble(
+  from = c("1948-11-01", "1953-07-01", "1957-08-01", "1960-04-01", "1969-12-01", "1973-11-01", "1980-01-01","1981-07-01", "1990-07-01", "2001-03-01", "2007-12-01","2020-02-01"),  
+  to = c("1949-10-01", "1954-05-01", "1958-04-01", "1961-02-01", "1970-11-01", "1975-03-01", "1980-07-01", "1982-11-01", "1991-03-01", "2001-11-01", "2009-06-01", "2020-04-30") 
+  )  %>% 
+  mutate(From = ymd(from), 
+         To=ymd(to),
+         duration_days = To-From)
+
+
+recessions
+```
+
+- To add the grey shaded areas corresponding to recessions, we use `geom_rect()`
+- to colour the ribbons blue/red we must see whether the spread is positive or negative and then use `geom_ribbon()`. You should be familiar with this from last week's homework on the excess weekly/monthly rentals of Santander Bikes in London.
+
+```{r}
+library(scales)
+library(ggtext)
+library(tidyr)
+
+
+yield_curve_3months<- yield_curve %>% 
+  filter(maturity %in% c("3m")) %>%
+  pivot_wider(names_from="maturity",values_from="value") %>% 
+  rename(three_month="3m")
+
+yield_curve_10years <- yield_curve %>% 
+  filter(maturity %in% c("10y")) %>%
+  pivot_wider(names_from="maturity",values_from="value") %>% 
+  rename(ten_year="10y")
+
+tidyverse_yield <- yield_curve_10y_3m <- left_join(yield_curve_3months,yield_curve_10years,by="date") %>% 
+  mutate(spread=ten_year-three_month) %>% 
+  rename(dates2=date)
+
+
+tidyverse_yield %>% 
+  #Plot dates
+  ggplot(aes(x=dates2)) +
+  #Plot the recession lines
+  geom_rect(data=recessions,aes(xmin=From,xmax=To,ymin=-Inf,ymax=Inf),fill='darkgray',inherit.aes=FALSE,alpha=0.35)+
+  
+  
+  scale_x_date(date_breaks="2 years",labels=date_format("%Y"),limits=as.Date(c('1959-01-01','2021-08-01')))+
+  geom_line(aes(y=spread),size=0.75)+
+  geom_ribbon(aes(ymin=0,ymax=pmax(spread,0)),fill="skyblue",alpha=0.75)+
+  geom_ribbon(aes(ymin=pmin(0,spread),ymax=0),fill="salmon",alpha=0.75)+
+  geom_rug(data=subset(tidyverse_yield,spread>0),color="skyblue",sides="b",alpha=0.75)+
+  geom_rug(data=subset(tidyverse_yield,spread<=0),color="salmon",sides="b",alpha=0.75)+
+  geom_hline(yintercept=0,color="black")+
+  #Theme and title
+  theme_bw()+
+   labs(
+    title = "Yield Curve Inversion: USA treasury rate for 10-years - 3-month",
+    x = "", 
+    y = "Differences in yield")+
+   theme(
+    plot.title = element_text(size = 14),
+    plot.subtitle = element_text(size=11),
+    axis.title.y=element_text(size=13),
+    plot.caption = element_text(size = 10),
+    legend.position = "none" 
+    )
+```
