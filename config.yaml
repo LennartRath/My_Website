@@ -55,9 +55,9 @@ params:
   image: 'LBS.jfif'
   name: Lennart R
   navigation:
-    button1:
-      - name: My work
-        url: blogs
+    #button1:
+     # - name: My work
+      #  url: blogs
     #button2:
      # - name: Log In
       #  url: '#'
