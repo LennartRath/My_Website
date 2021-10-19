@@ -1,0 +1,59 @@
+---
+title: "Things I enjoy doing"
+date: '2021-10-19'
+description: Njoy
+draft: no
+image: Grouppic.jpg
+keywords: ''
+slug: njoy
+categories:
+- ''
+- ''
+---
+
+
+```{r, setup, include=FALSE}
+knitr::opts_chunk$set(
+  message = FALSE, 
+  warning = FALSE,
+  tidy=FALSE,     # display code as typed
+  size="small")   # slightly smaller font for code
+options(digits = 3)
+
+# default figure size
+knitr::opts_chunk$set(
+  fig.width=6.75, 
+  fig.height=6.75,
+  fig.align = "center"
+)
+
+```
+
+
+# Things I enjoy doing
+
+## Improving myself
+
+```{r, echo=FALSE, out.width="100%"}
+knitr::include_graphics("/img/clean.jfif", error = FALSE)
+```
+
+## Quality time
+
+```{r, echo=FALSE, out.width="100%"}
+knitr::include_graphics("/img/child.png", error = FALSE)
+```
+
+## Psychology
+
+```{r, echo=FALSE, out.width="100%"}
+knitr::include_graphics("/img/psychology.jpg", error = FALSE)
+```
+
+## Weights
+
+```{r, echo=FALSE, out.width="100%"}
+knitr::include_graphics("/img/weights.jpg", error = FALSE)
+```
+
+

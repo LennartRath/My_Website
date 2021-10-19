@@ -3,7 +3,7 @@ title: "About me"
 date: '2021-10-19'
 description: About me
 draft: no
-image:
+image: LennartRath.jpg
 keywords: ''
 slug: aboutme
 categories:
