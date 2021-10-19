@@ -53,7 +53,7 @@ params:
       - icon: fa-linkedin
         label: LinkedIn
         url: https://www.linkedin.com/in/lennart-rath/
-  image: 'LBS.jif'
+  image: 'LBS.jfif'
   name: Lennart R
   navigation:
     button1:
@@ -72,19 +72,19 @@ params:
       - name: Elements
         url: elements.html
     menu: Menu
-    subtitle: By HTML5 Up
-    title: Portfolio Site
+    subtitle: Data Science is fun!
+    title: Lennart's Portfolio
   tiles:
     enable: yes
     showcase:
-      - image: lbs.jfif
-        subtitle: Ipsum Dolor Sit Amet
-        title: Aliquam
-        url: blogs/aliquam
-      - image: pic02.jpg
-        subtitle: Feugiat Amet Tempus
-        title: Tempus
-        url: blogs/tempus
+      - image: LennartRath.jpg
+        subtitle: Learn about me!
+        title: About me
+        url: blogs/aboutme
+      - image: Grouppic.jpeg
+        subtitle: Things Lennart likes
+        title: Enjoyable things
+        url: blogs/njoy
       - image: pic03.jpg
         subtitle: Lorem Etiam Nullam
         title: Magna
