@@ -84,10 +84,10 @@ params:
         subtitle: Things Lennart likes
         title: Enjoyable things
         url: blogs/njoy
-      - image: pic03.jpg
-        subtitle: Lorem Etiam Nullam
-        title: Magna
-        url: blogs/magna
+      - image: yield_curve.jpg
+        subtitle: Case Study Yield Curve Inversion
+        title: Yield Curve Inversion
+        url: blogs/yieldcurve
       - image: Rio.jpg
         subtitle: Case Study AirBnB in Rio de Janeiro
         title: RIO
