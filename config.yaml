@@ -1,4 +1,5 @@
-baseURL: https://lennartr.netlify.app
+baseURL: https://lennartr.netlify.app/
+
 languageCode: en-us
 title: Lennart´s Portfolio Website
 theme: forty
@@ -7,10 +8,10 @@ disqusShortname: ''
 params:
   banner:
     buttonText: Get Started
-    subtitle: |-
+    #subtitle: |-
       A RESPONSIVE SITE TEMPLATE DESIGNED BY HTML5 UP
       AND RELEASED UNDER THE CREATIVE COMMONS.
-    title: Hi, my name is Lennart
+    title: Hi, my name is Lennart and welcome to my portfolio website - happy to have you here!
   blog: {}
   contact: lrath.mfa2022@london.edu
     address:
@@ -28,7 +29,7 @@ params:
         title: Phone
   custom_css: []
   custom_js: []
-  description: Your description
+  description: This is the portfolio website I would like to use to introduce you to my R competencies.
   error404:
     heading: Page couldn't be found
     text: Please visit [this page](/)
@@ -38,33 +39,30 @@ params:
     enable: yes
     quicklinks:
       - alt: HTML5 UP
-        text: 'Design: '
+        text: 'Design: HTML5 UP'
         url: https://www.html5up.net
     social:
-      - icon: fa-twitter
-        label: Twitter
-        url: https://www.twitter.com
       - icon: fa-facebook
         label: Facebook
-        url: https://www.facebook.com
+        url: https://www.facebook.com/rath.lennart/
       - icon: fa-instagram
         label: Instagram
-        url: https://www.instagram.com
+        url: https://www.instagram.com/lennartra
       - icon: fa-github
         label: GitHub
-        url: https://www.github.com
+        url: https://github.com/LennartRath
       - icon: fa-linkedin
         label: LinkedIn
-        url: https://www.linkedin.com
-  image: ''
+        url: https://www.linkedin.com/in/lennart-rath/
+  image: 'LBS.jif'
   name: Lennart R
   navigation:
     button1:
-      - name: Get Started
+      - name: My work
         url: blogs
-    button2:
-      - name: Log In
-        url: '#'
+    #button2:
+     # - name: Log In
+      #  url: '#'
     links:
       - name: Home
         url: '#'
@@ -80,7 +78,7 @@ params:
   tiles:
     enable: yes
     showcase:
-      - image: pic01.jpg
+      - image: lbs.jif.jpg
         subtitle: Ipsum Dolor Sit Amet
         title: Aliquam
         url: blogs/aliquam
@@ -96,14 +94,7 @@ params:
         subtitle: Nisl Sed Aliquam
         title: Ipsum
         url: blogs/ipsum
-      - image: pic05.jpg
-        subtitle: Ipsum Dolor Sit Amet
-        title: Consequat
-        url: blogs/ipsum
-      - image: pic06.jpg
-        subtitle: Feugiat Amet Tempus
-        title: Etiam
-        url: blogs/ipsum
+
   two:
     buttonText: I am getting started!
     enable: yes
