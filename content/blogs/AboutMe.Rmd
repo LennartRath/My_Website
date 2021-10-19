@@ -1,9 +1,9 @@
 ---
-title: "Yield Curve Inversion"
+title: "About me"
 date: '2021-10-19'
-description: Case Study Yield Cure Inversion
+description: About me
 draft: no
-image: LennartRath.jpg
+image:
 keywords: ''
 slug: aboutme
 categories:
@@ -41,8 +41,8 @@ knitr::include_graphics("/img/cute.jpg", error = FALSE)
 ```
 
 # Lennart Rath
- ## An Autobiography
- ### _Totally not a lazy CV_
+## An Autobiography
+### _Totally not a lazy CV_
  
  
 - __Education__
