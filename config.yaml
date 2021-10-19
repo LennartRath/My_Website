@@ -57,7 +57,7 @@ params:
   navigation:
     button1:
       - name: My work
-        url: Contents
+        url: blogs
     #button2:
      # - name: Log In
       #  url: '#'
